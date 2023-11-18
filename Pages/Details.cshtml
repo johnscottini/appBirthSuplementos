@@ -1,0 +1,21 @@
+@page "/supplement/{slug}/{id}"
+@model lojaSuplementosAppWeb.Pages.DetailsModel;
+
+<h2 class="my-3">@Model.Supplement.Name</h2>
+<div class="row">
+<div class="col-4">
+<img class="img-fluid rounded" src="@Model.Supplement.ImageUri">
+</div>
+<div class="col-6">
+<h4 class="my-3">Sobre:</h4>
+<p>@Model.Supplement.Description</p>
+<h4 class="my-3">Mais Info:</h4>
+<ul>
+    <li><label asp-for="Supplement.Value"></label>: @Html.DisplayFor(model => model.Supplement.Value)</li>
+    <li><label asp-for="Supplement.HasGluten"></label>: @Model.Supplement.formatedHasGluten</li>
+    <li><label asp-for="Supplement.RegistrationDate"></label>: @Html.DisplayFor(model => model.Supplement.RegistrationDate)</li>
+</ul>
+<a class="btn my-3 btn-primary"
+asp-page="Edit" asp-route-id="@Model.Supplement.SupplementId">Editar</a>
+</div>
+</div>
