@@ -1,8 +1,8 @@
-
 using lojaSuplementosAppWeb.Models;
 
-namespace lojaSuplementosAppWeb.Services;
-public class SupplementService : ISupplementService {
+namespace lojaSuplementosAppWeb.Services.Memory;
+public class SupplementService : ISupplementService
+{
 
     private IList<Supplement> _supplements;
 
@@ -57,13 +57,14 @@ public class SupplementService : ISupplementService {
     }
     public IList<Supplement> GetAll() => _supplements;
 
-    public Supplement Get(int id) {
+    public Supplement Get(int id)
+    {
         return _supplements.SingleOrDefault(item => item.SupplementId == id);
     }
 
     public void Insert(Supplement supplement)
     {
-        var nextNumber = _supplements.Max(item =>  item.SupplementId) + 1;
+        var nextNumber = _supplements.Max(item => item.SupplementId) + 1;
         supplement.SupplementId = nextNumber;
         _supplements.Add(supplement);
     }
@@ -76,11 +77,22 @@ public class SupplementService : ISupplementService {
         supplementFound.Value = supplement.Value;
         supplementFound.HasGluten = supplement.HasGluten;
         supplementFound.RegistrationDate = supplement.RegistrationDate;
+        supplementFound.ImageUri = supplement.ImageUri;
     }
 
     public void Delete(int id)
     {
         var supplementFound = Get(id);
         _supplements.Remove(supplementFound);
+    }
+
+    public IList<Brand> GetAllBrands()
+    {
+        return new List<Brand>()
+            {
+                new Brand() { description = "Growth"},
+                new Brand() { description = "Max Titanium"},
+                new Brand() { description = "Essential"},
+            };
     }
 }

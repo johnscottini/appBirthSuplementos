@@ -1,10 +1,15 @@
+using lojaSuplementosAppWeb.Data;
 using lojaSuplementosAppWeb.Services;
+using lojaSuplementosAppWeb.Services.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<ISupplementService, SupplementService>();
+builder.Services.AddTransient<ISupplementService, SupplementService>();
+
+builder.Services.AddDbContext<LojaSuplementosDbContext>();
+
 var app = builder.Build();
 
 /*// Configure the HTTP request pipeline.
